@@ -36,7 +36,7 @@ As always - FULL CREDIT to Ray for all his hard work to build and maintain the O
 Current Release
 ---------------
 
-Version:     Opensprinkler V2.1.6 / DEVELOPMENT
+Version:     Opensprinkler V2.1.6 / BETA
 
 Date:        January 2016
 
