@@ -8,7 +8,7 @@ Repository: https://github.com/Dave1001/OpenSprinkler-Arduino
 
 License:	Creative Commons Attribution-ShareAlike 3.0 license
 
-About:		OpenSprinkler-Arduino is a fork of Ray's OpenSprinkler code thats amended to use alternative hardware:
+About:		OpenSprinkler-Arduino is a fork of Ray's OpenSprinkler code that's amended to use alternative hardware:
 				- Arduino Mega 2560 (Arduino MCU that can handle compiled code size of around 60K)
 				- Your choice of ethernet:
 					- Wiznet W5100 Ethernet with onboard SD Card or
@@ -60,8 +60,8 @@ Original Opensprinkler code commences below here
 
 #include <Arduino.h>
 #include "Config.h"
-#include "../Defines.h"
-#include "../OpenSprinkler.h"
+#include "Defines.h"
+#include "OpenSprinkler.h"
 
 #ifdef OPENSPRINKLER_ARDUINO
 
@@ -76,7 +76,7 @@ Original Opensprinkler code commences below here
 		#include <Ethernet.h>
 		#include <EthernetUdp.h>
 		#include <ICMPPing.h>
-		#include "../EtherCardW5100.h"
+		#include "EtherCardW5100.h"
 	#else
 		//#include <EtherCard.h>
 	#endif

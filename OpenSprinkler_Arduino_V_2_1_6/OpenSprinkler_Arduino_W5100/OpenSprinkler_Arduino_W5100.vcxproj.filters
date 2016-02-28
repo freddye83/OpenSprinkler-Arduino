@@ -24,54 +24,54 @@
     <ClInclude Include="Config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Defines.h">
+    <ClInclude Include="Defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\EtherCardW5100.h">
+    <ClInclude Include="EtherCardW5100.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Gpio.h">
+    <ClInclude Include="gpio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\OpenSprinkler.h">
+    <ClInclude Include="OpenSprinkler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\OpenSprinklerProgram.h">
+    <ClInclude Include="OpenSprinklerProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\OpenSprinklerServer.h">
+    <ClInclude Include="OpenSprinklerServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Utils.h">
+    <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Weather.h">
+    <ClInclude Include="weather.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\EtherCardW5100.cpp">
+    <ClCompile Include="EtherCardW5100.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Gpio.cpp">
+    <ClCompile Include="gpio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenSprinkler.cpp">
+    <ClCompile Include="OpenSprinkler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenSprinklerMain.cpp">
+    <ClCompile Include="OpenSprinklerMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenSprinklerProgram.cpp">
+    <ClCompile Include="OpenSprinklerProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenSprinklerServer.cpp">
+    <ClCompile Include="OpenSprinklerServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Utils.cpp">
+    <ClCompile Include="utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Weather.cpp">
+    <ClCompile Include="weather.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

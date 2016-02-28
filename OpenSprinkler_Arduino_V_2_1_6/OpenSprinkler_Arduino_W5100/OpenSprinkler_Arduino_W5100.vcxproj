@@ -74,6 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;C:\Users\Dave\Dropbox\GitHub\OpenSprinkler-Arduino\OpenSprinkler_Arduino_V_2_1_6\OpenSprinkler_Arduino_W5100;C:\Users\Dave\Dropbox\Arduino\libraries\DS1307RTC;C:\Users\Dave\Dropbox\Arduino\libraries\DS1307RTC\utility;C:\Program Files (x86)\Arduino\libraries\Ethernet\src;C:\Program Files (x86)\Arduino\libraries\Ethernet\src\utility;C:\Users\Dave\Dropbox\Arduino\libraries\ICMPPing;C:\Users\Dave\Dropbox\Arduino\libraries\ICMPPing\utility;C:\Program Files (x86)\Arduino\libraries\LiquidCrystal\src;C:\Program Files (x86)\Arduino\libraries\LiquidCrystal\src\utility;C:\Users\Dave\Dropbox\Arduino\libraries\MemoryFree;C:\Users\Dave\Dropbox\Arduino\libraries\MemoryFree\utility;C:\Users\Dave\Dropbox\Arduino\libraries\SdFat;C:\Users\Dave\Dropbox\Arduino\libraries\SdFat\utility;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\utility;C:\Users\Dave\Dropbox\Arduino\libraries\Time;C:\Users\Dave\Dropbox\Arduino\libraries\Time\utility;C:\Users\Dave\Dropbox\Arduino\libraries\TimeAlarms;C:\Users\Dave\Dropbox\Arduino\libraries\TimeAlarms\utility;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\utility;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\vagjduez.qaa\Micro Platforms\default\debuggers;C:\Users\Dave\Dropbox\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;C:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;C:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -96,7 +97,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;C:\Users\Dave\Dropbox\GitHub\OpenSprinkler-Arduino\OpenSprinkler_Arduino_V_2_1_6\OpenSprinkler_Arduino_W5100;C:\Users\Dave\Dropbox\Arduino\libraries\DS1307RTC;C:\Users\Dave\Dropbox\Arduino\libraries\DS1307RTC\utility;C:\Program Files (x86)\Arduino\libraries\Ethernet\src;C:\Program Files (x86)\Arduino\libraries\Ethernet\src\utility;C:\Users\Dave\Dropbox\Arduino\libraries\ICMPPing;C:\Users\Dave\Dropbox\Arduino\libraries\ICMPPing\utility;C:\Program Files (x86)\Arduino\libraries\LiquidCrystal\src;C:\Program Files (x86)\Arduino\libraries\LiquidCrystal\src\utility;C:\Users\Dave\Dropbox\Arduino\libraries\MemoryFree;C:\Users\Dave\Dropbox\Arduino\libraries\MemoryFree\utility;C:\Users\Dave\Dropbox\Arduino\libraries\SdFat;C:\Users\Dave\Dropbox\Arduino\libraries\SdFat\utility;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\utility;C:\Users\Dave\Dropbox\Arduino\libraries\Time;C:\Users\Dave\Dropbox\Arduino\libraries\Time\utility;C:\Users\Dave\Dropbox\Arduino\libraries\TimeAlarms;C:\Users\Dave\Dropbox\Arduino\libraries\TimeAlarms\utility;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\utility;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\vagjduez.qaa\Micro Platforms\default\debuggers;C:\Users\Dave\Dropbox\Arduino\libraries;C:\Users\Dave\Dropbox\GitHub\OpenSprinkler-Arduino\OpenSprinkler_Arduino_V_2_1_6\OpenSprinkler_Arduino_W5100;C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;C:\Users\Dave\Dropbox\Arduino\libraries\DS1307RTC;C:\Program Files (x86)\Arduino\libraries\Ethernet\src;C:\Users\Dave\Dropbox\Arduino\libraries\ICMPPing;C:\Program Files (x86)\Arduino\libraries\LiquidCrystal\src;C:\Users\Dave\Dropbox\Arduino\libraries\MemoryFree;C:\Users\Dave\Dropbox\Arduino\libraries\SdFat;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI;C:\Users\Dave\Dropbox\Arduino\libraries\Time;C:\Users\Dave\Dropbox\Arduino\libraries\TimeAlarms;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\vagjduez.qaa\Micro Platforms\default\debuggers;C:\Users\Dave\Dropbox\Arduino\libraries;C:\Users\Dave\Dropbox\Arduino\libraries\SdFat\utility;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\utility;C:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;C:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;C:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;C:\Users\Dave\Dropbox\GitHub\OpenSprinkler-Arduino\OpenSprinkler_Arduino_V_2_1_6\OpenSprinkler_Arduino_W5100;C:\Users\Dave\Dropbox\Arduino\libraries\DS1307RTC;C:\Users\Dave\Dropbox\Arduino\libraries\DS1307RTC\utility;C:\Program Files (x86)\Arduino\libraries\Ethernet\src;C:\Program Files (x86)\Arduino\libraries\Ethernet\src\utility;C:\Users\Dave\Dropbox\Arduino\libraries\ICMPPing;C:\Users\Dave\Dropbox\Arduino\libraries\ICMPPing\utility;C:\Program Files (x86)\Arduino\libraries\LiquidCrystal\src;C:\Program Files (x86)\Arduino\libraries\LiquidCrystal\src\utility;C:\Users\Dave\Dropbox\Arduino\libraries\MemoryFree;C:\Users\Dave\Dropbox\Arduino\libraries\MemoryFree\utility;C:\Users\Dave\Dropbox\Arduino\libraries\SdFat;C:\Users\Dave\Dropbox\Arduino\libraries\SdFat\utility;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\utility;C:\Users\Dave\Dropbox\Arduino\libraries\Time;C:\Users\Dave\Dropbox\Arduino\libraries\Time\utility;C:\Users\Dave\Dropbox\Arduino\libraries\TimeAlarms;C:\Users\Dave\Dropbox\Arduino\libraries\TimeAlarms\utility;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\utility;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\vagjduez.qaa\Micro Platforms\default\debuggers;C:\Users\Dave\Dropbox\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;C:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;C:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>C:\Users\Dave\Dropbox\GitHub\OpenSprinkler-Arduino\OpenSprinkler_Arduino_V_2_1_6\OpenSprinkler_Arduino_W5100\__vm\.OpenSprinkler_Arduino_W5100.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -128,28 +129,26 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Defines.h" />
-    <ClInclude Include="..\EtherCardW5100.h" />
-    <ClInclude Include="..\Gpio.h" />
-    <ClInclude Include="..\OpenSprinkler.h" />
-    <ClInclude Include="..\OpenSprinklerProgram.h" />
-    <ClInclude Include="..\OpenSprinklerServer.h" />
-    <ClInclude Include="..\Utils.h" />
-    <ClInclude Include="..\Weather.h" />
-    <ClInclude Include="Config.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Defines.h" />
+    <ClInclude Include="EtherCardW5100.h" />
+    <ClInclude Include="gpio.h" />
+    <ClInclude Include="OpenSprinkler.h" />
+    <ClInclude Include="OpenSprinklerProgram.h" />
+    <ClInclude Include="OpenSprinklerServer.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="weather.h" />
     <ClInclude Include="__vm\.OpenSprinkler_Arduino_W5100.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\EtherCardW5100.cpp" />
-    <ClCompile Include="..\Gpio.cpp" />
-    <ClCompile Include="..\OpenSprinkler.cpp" />
-    <ClCompile Include="..\OpenSprinklerMain.cpp" />
-    <ClCompile Include="..\OpenSprinklerProgram.cpp" />
-    <ClCompile Include="..\OpenSprinklerServer.cpp" />
-    <ClCompile Include="..\Utils.cpp" />
-    <ClCompile Include="..\Weather.cpp" />
+    <ClCompile Include="EtherCardW5100.cpp" />
+    <ClCompile Include="gpio.cpp" />
+    <ClCompile Include="OpenSprinkler.cpp" />
+    <ClCompile Include="OpenSprinklerMain.cpp" />
+    <ClCompile Include="OpenSprinklerProgram.cpp" />
+    <ClCompile Include="OpenSprinklerServer.cpp" />
+    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="weather.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
