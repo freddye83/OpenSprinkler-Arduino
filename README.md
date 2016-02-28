@@ -72,7 +72,10 @@ Installation
 
 To install and compile this code you need:
    
-   1.  Arduino IDE    http://arduino.cc/
+   1.  Arduino IDE -> http://arduino.cc/
+  
+       As an alternative, I use Visual Studio 2015 plus the Visual Micro add-on from here -> http://www.visualmicro.com/
+       Visual Micro is relatively inexpensive and provides solid debugging support (much easier than 'Serial.print' statements)
   
    2.  Libraries:
 
