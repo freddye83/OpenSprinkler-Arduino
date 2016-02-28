@@ -1,4 +1,4 @@
-UPDATE JANUARY 2016 - V2.1.6 IS IN BETA
+UPDATE FEBRUARY 2016 - V2.1.6 IS IN BETA
 ---------------------------------------
   
 OpenSprinkler_Arduino V2.0.0	- superceded / it contains deprecated types that will no longer compile in the Arduino IDE
@@ -38,7 +38,7 @@ Current Release
 
 Version:     Opensprinkler V2.1.6 / BETA
 
-Date:        January 2016
+Date:        February 2016
 
 Repository:  https://github.com/Dave1001/OpenSprinkler-Arduino
 
