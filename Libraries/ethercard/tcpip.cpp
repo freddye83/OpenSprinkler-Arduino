@@ -28,7 +28,7 @@
 
 #define TCPCLIENT_SRC_PORT_H 11 //Source port (MSB) for TCP/IP client connections - hardcode all TCP/IP client connection from ports in range 2816-3071
 static uint8_t tcpclient_src_port_l=1; // Source port (LSB) for tcp/ip client connections - increments on each TCP/IP request
-// static uint8_t tcp_fd; // a file descriptor, will be encoded into the port
+static uint8_t tcp_fd; // a file descriptor, will be encoded into the port
 static uint8_t tcp_client_state; //TCP connection state: 1=Send SYN, 2=SYN sent awaiting SYN+ACK, 3=Established, 4=Not used, 5=Closing, 6=Closed
 static uint8_t tcp_client_port_h; // Destination port (MSB) of TCP/IP client connection
 static uint8_t tcp_client_port_l; // Destination port (LSB) of TCP/IP client connection

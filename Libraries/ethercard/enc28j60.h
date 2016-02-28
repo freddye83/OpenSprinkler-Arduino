@@ -186,6 +186,7 @@ public:
 
 typedef ENC28J60 Ethernet; //!< Define alias Ethernet for ENC28J60
 
+
 /** Workaround for Errata 13.
 *   The transmission hardware may drop some packets because it thinks a late collision
 *   occurred (which should never happen if all cable length etc. are ok). If setting

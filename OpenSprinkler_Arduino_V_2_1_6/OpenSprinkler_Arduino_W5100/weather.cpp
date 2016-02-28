@@ -288,8 +288,6 @@ void GetWeather()
 	}
 	client.stop();
 }
-#endif // GetWeather()
-
 
 void peel_http_header()   // remove the HTTP header
 {
@@ -324,6 +322,7 @@ void peel_http_header()   // remove the HTTP header
         i++;
     }
 }
+#endif // GetWeather()
 
 
 

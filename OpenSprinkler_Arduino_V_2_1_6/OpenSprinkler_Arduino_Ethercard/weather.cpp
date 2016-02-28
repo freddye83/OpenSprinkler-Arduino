@@ -21,15 +21,23 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#if defined(ARDUINO)
+#include "Config.h"
+#include "Defines.h"
 
+#ifdef OPENSPRINKLER_ARDUINO_W5100
+	#include <Arduino.h>
+	#include <Ethernet.h>
+    #include <Dns.h>
+    extern char ether_buffer[];
+#elif defined(ARDUINO)
+    #include <Arduino.h>
 #else
-#include "etherport.h"
-#include <string.h>
-#include <stdlib.h>
-#include <netdb.h>
-extern char ether_buffer[];
-#endif
+	#include "etherport.h"
+	#include <string.h>
+	#include <stdlib.h>
+	#include <netdb.h>
+    extern char ether_buffer[];
+#endif // OPENSPRINKLER_ARDUINO_W5100
 
 extern const char wtopts_filename[];
 
@@ -41,6 +49,10 @@ extern OpenSprinkler os; // OpenSprinkler object
 extern char tmp_buffer[];
 byte findKeyVal ( const char *str,char *strbuf, uint8_t maxlen,const char *key,bool key_in_pgm=false,uint8_t *keyfound=NULL );
 void write_log ( byte type, ulong curr_time );
+
+#ifdef OPENSPRINKLER_ARDUINO
+extern uint8_t weather_retries;	//	defined in OpenSprinklerMain.cpp
+#endif // OPENSPRINKLER_ARDUINO_W5100
 
 // The weather function calls getweather.py on remote server to retrieve weather data
 // the default script is WEATHER_SCRIPT_HOST/weather?.py
@@ -63,7 +75,15 @@ static void getweather_callback ( byte status, uint16_t off, uint16_t len )
     {
         p++;
     }
-    if ( *p != '&' )  return;
+
+    if ( *p != '&' )
+        return;
+#ifdef OPENSPRINKLER_ARDUINO
+    else
+        // Success! set retries back to zero
+        weather_retries = 0;
+#endif // OPENSPRINKLER_ARDUINO
+
     int v;
     if ( findKeyVal ( p, tmp_buffer, TMP_BUFFER_SIZE, PSTR ( "sunrise" ), true ) )
     {
@@ -133,7 +153,7 @@ static void getweather_callback ( byte status, uint16_t off, uint16_t len )
     write_log ( LOGDATA_WATERLEVEL, os.checkwt_success_lasttime );
 }
 
-#if defined(ARDUINO)  // for AVR
+#if defined(ARDUINO) // for AVR
 void GetWeather()
 {
     // perform DNS lookup for every query
@@ -181,6 +201,94 @@ void GetWeather()
 
 #else // for RPI/BBB/LINUX
 
+void GetWeather()
+{
+	EthernetClient client;
+
+	struct hostent *server;
+	nvm_read_block(tmp_buffer, (void*)ADDR_NVM_WEATHERURL, MAX_WEATHERURL);
+	server = gethostbyname(tmp_buffer);
+	if (!server)
+	{
+		DEBUG_PRINTLN("can't resolve weather server");
+		return;
+	}
+	DEBUG_PRINT("weather server ip:");
+	DEBUG_PRINT(((uint8_t*)server->h_addr)[0]);
+	DEBUG_PRINT(":");
+	DEBUG_PRINT(((uint8_t*)server->h_addr)[1]);
+	DEBUG_PRINT(":");
+	DEBUG_PRINT(((uint8_t*)server->h_addr)[2]);
+	DEBUG_PRINT(":");
+	DEBUG_PRINTLN(((uint8_t*)server->h_addr)[3]);
+
+	if (!client.connect((uint8_t*)server->h_addr, 80))
+	{
+		client.stop();
+		return;
+	}
+
+	BufferFiller bf = tmp_buffer;
+	char tmp[100];
+	read_from_file(wtopts_filename, tmp, 100);
+	bf.emit_p(PSTR("$D.py?loc=$E&key=$E&fwv=$D&wto=$S"),
+		(int)os.options[OPTION_USE_WEATHER],
+		ADDR_NVM_LOCATION,
+		ADDR_NVM_WEATHER_KEY,
+		(int)os.options[OPTION_FW_VERSION],
+		tmp);
+
+	char *src = tmp_buffer + strlen(tmp_buffer);
+	char *dst = tmp_buffer + TMP_BUFFER_SIZE - 12;
+
+	char c;
+	// url encode. convert SPACE to %20
+	// copy reversely from the end because we are potentially expanding
+	// the string size
+	while (src != tmp_buffer)
+	{
+		c = *src--;
+		if (c == ' ')
+		{
+			*dst-- = '0';
+			*dst-- = '2';
+			*dst-- = '%';
+		}
+		else
+		{
+			*dst-- = c;
+		}
+	};
+	*dst = *src;
+
+	char urlBuffer[255];
+	strcpy(urlBuffer, "GET /weather");
+	strcat(urlBuffer, dst);
+	strcat(urlBuffer, " HTTP/1.0\r\nHOST: weather.opensprinkler.com\r\n\r\n");
+
+	DEBUG_PRINTLN(urlBuffer);
+	client.write((uint8_t *)urlBuffer, strlen(urlBuffer));
+
+	bzero(ether_buffer, ETHER_BUFFER_SIZE);
+
+	time_t timeout = os.now_tz() + 5; // 5 seconds timeout
+	while (os.now_tz() < timeout)
+	{
+		int len = client.read((uint8_t *)ether_buffer, ETHER_BUFFER_SIZE);
+		if (len <= 0)
+		{
+			if (!client.connected())
+				break;
+			else
+				continue;
+		}
+		peel_http_header();
+		getweather_callback(0, 0, ETHER_BUFFER_SIZE);
+		break;
+	}
+	client.stop();
+}
+
 void peel_http_header()   // remove the HTTP header
 {
     int i=0;
@@ -214,93 +322,7 @@ void peel_http_header()   // remove the HTTP header
         i++;
     }
 }
-
-void GetWeather()
-{
-    EthernetClient client;
-
-    struct hostent *server;
-    nvm_read_block ( tmp_buffer, ( void* ) ADDR_NVM_WEATHERURL, MAX_WEATHERURL );
-    server = gethostbyname ( tmp_buffer );
-    if ( !server )
-    {
-        DEBUG_PRINTLN ( "can't resolve weather server" );
-        return;
-    }
-    DEBUG_PRINT ( "weather server ip:" );
-    DEBUG_PRINT ( ( ( uint8_t* ) server->h_addr ) [0] );
-    DEBUG_PRINT ( ":" );
-    DEBUG_PRINT ( ( ( uint8_t* ) server->h_addr ) [1] );
-    DEBUG_PRINT ( ":" );
-    DEBUG_PRINT ( ( ( uint8_t* ) server->h_addr ) [2] );
-    DEBUG_PRINT ( ":" );
-    DEBUG_PRINTLN ( ( ( uint8_t* ) server->h_addr ) [3] );
-
-    if ( !client.connect ( ( uint8_t* ) server->h_addr, 80 ) )
-    {
-        client.stop();
-        return;
-    }
-
-    BufferFiller bf = tmp_buffer;
-    char tmp[100];
-    read_from_file ( wtopts_filename, tmp, 100 );
-    bf.emit_p ( PSTR ( "$D.py?loc=$E&key=$E&fwv=$D&wto=$S" ),
-                ( int ) os.options[OPTION_USE_WEATHER],
-                ADDR_NVM_LOCATION,
-                ADDR_NVM_WEATHER_KEY,
-                ( int ) os.options[OPTION_FW_VERSION],
-                tmp );
-
-    char *src=tmp_buffer+strlen ( tmp_buffer );
-    char *dst=tmp_buffer+TMP_BUFFER_SIZE-12;
-
-    char c;
-    // url encode. convert SPACE to %20
-    // copy reversely from the end because we are potentially expanding
-    // the string size
-    while ( src!=tmp_buffer )
-    {
-        c = *src--;
-        if ( c==' ' )
-        {
-            *dst-- = '0';
-            *dst-- = '2';
-            *dst-- = '%';
-        }
-        else
-        {
-            *dst-- = c;
-        }
-    };
-    *dst = *src;
-
-    char urlBuffer[255];
-    strcpy ( urlBuffer, "GET /weather" );
-    strcat ( urlBuffer, dst );
-    strcat ( urlBuffer, " HTTP/1.0\r\nHOST: weather.opensprinkler.com\r\n\r\n" );
-
-    DEBUG_PRINTLN ( urlBuffer );
-    client.write ( ( uint8_t * ) urlBuffer, strlen ( urlBuffer ) );
-
-    bzero ( ether_buffer, ETHER_BUFFER_SIZE );
-
-    time_t timeout = os.now_tz() + 5; // 5 seconds timeout
-    while ( os.now_tz() < timeout )
-    {
-        int len=client.read ( ( uint8_t * ) ether_buffer, ETHER_BUFFER_SIZE );
-        if ( len<=0 )
-        {
-            if ( !client.connected() )
-                break;
-            else
-                continue;
-        }
-        peel_http_header();
-        getweather_callback ( 0, 0, ETHER_BUFFER_SIZE );
-        break;
-    }
-    client.stop();
-}
 #endif // GetWeather()
+
+
 

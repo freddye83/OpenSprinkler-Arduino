@@ -43,8 +43,13 @@ ulong OpenSprinkler::flowcount_rt;
 ulong OpenSprinkler::flowcount_time_ms;
 ulong OpenSprinkler::raindelay_start_time;
 byte OpenSprinkler::button_timeout;
-ulong OpenSprinkler::checkwt_lasttime;
-ulong OpenSprinkler::checkwt_success_lasttime;
+#ifdef OPENSPRINKLER_ARDUINO
+	ulong OpenSprinkler::checkwt_lasttime = 0;
+	ulong OpenSprinkler::checkwt_success_lasttime = 0;
+#else
+	ulong OpenSprinkler::checkwt_lasttime;
+	ulong OpenSprinkler::checkwt_success_lasttime;
+#endif
 
 char tmp_buffer[TMP_BUFFER_SIZE+1];       // scratch buffer
 
@@ -74,7 +79,6 @@ LiquidCrystal OpenSprinkler::lcd ( PIN_LCD_RS, PIN_LCD_EN, PIN_LCD_D4, PIN_LCD_D
 #else
 LiquidCrystal OpenSprinkler::lcd;
 #endif
-
 
 #include <SdFat.h>
 extern SdFat sd;
@@ -322,7 +326,7 @@ static prog_char days_str[] PROGMEM =
 /** Calculate local time (UTC time plus time zone offset) */
 time_t OpenSprinkler::now_tz()
 {
-    return now()+ ( int32_t ) 3600/4* ( int32_t ) ( options[OPTION_TIMEZONE]-48 );
+    return now() + ( int32_t ) 3600/4* ( int32_t ) ( options[OPTION_TIMEZONE]-48 );
 }
 
 #if defined(ARDUINO)  // AVR network init functions
@@ -368,6 +372,9 @@ byte OpenSprinkler::start_network()
     tmp_buffer[3] = 0x2D;
     tmp_buffer[4] = 0x31;
     tmp_buffer[5] = options[OPTION_DEVICE_ID];
+#ifdef OPENSPRINKLER_ARDUINO_W5100
+    tmp_buffer[5] += 1;	// add one to the MAC to differentiate from ENCJ2860 - useful for debugging on same network
+#endif
 #else
     if ( !read_hardware_mac() )
     {
@@ -404,7 +411,7 @@ byte OpenSprinkler::start_network()
 
     // calculate http port number
     ether.hisport = ( unsigned int ) ( options[OPTION_HTTPPORT_1]<<8 ) + ( unsigned int ) options[OPTION_HTTPPORT_0];
-    DEBUG_PRINT ( F ( "Using http port " ) );
+    DEBUG_PRINT ( F ( "HTTP port:  " ) );
     DEBUG_PRINTLN ( ether.hisport );
 
     if ( options[OPTION_USE_DHCP] )
@@ -559,8 +566,8 @@ extern void flow_isr();
 void OpenSprinkler::begin()
 {
 #ifdef OPENSPRINKLER_ARDUINO
-	// This code is needed to handle multiple SPI devices - all the CS pins for each SPI device
-	// need to be pulled high to avoid interefering with each other (ethernet, SD, RF24 etc)
+    // This code is needed to handle multiple SPI devices - all the CS pins for each SPI device
+    // need to be pulled high to avoid interefering with each other (ethernet, SD, RF24 etc)
     for ( int i = 0; i < SPI_DEVICES; i++ )
     {
         pinMode ( spi_cs_pin[i], OUTPUT );
@@ -794,7 +801,20 @@ void OpenSprinkler::apply_all_station_bits()
 #ifdef OPENSPRINKLER_ARDUINO_DISCRETE //<MOD> ===== Digital Outputs 
     byte bid, s, sbits;
 
-    DEBUG_PRINT ( F ( "Stations: " ) );
+    if ( hour() <= 9 )
+        DEBUG_PRINT ( F ( "0" ) );
+    DEBUG_PRINT ( hour() );
+    DEBUG_PRINT ( F ( ":" ) );
+
+    if ( minute() <= 9 )
+        DEBUG_PRINT ( F ( "0" ) );
+    DEBUG_PRINT ( minute() );
+    DEBUG_PRINT ( F ( ":" ) );
+
+    if ( second() <= 9 )
+        DEBUG_PRINT ( F ( "0" ) );
+    DEBUG_PRINT ( second() );
+    DEBUG_PRINT ( F ( " Station pin: " ) );
 
     // Shift out all station bit values from the highest bit to the lowest
     for ( bid = 0; bid <= MAX_EXT_BOARDS; bid++ )

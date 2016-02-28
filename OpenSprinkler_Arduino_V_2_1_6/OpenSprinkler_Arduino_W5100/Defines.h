@@ -25,13 +25,13 @@
 #define _DEFINES_H
 
 #include <Arduino.h>
-#include <time.h>
+#include <Time.h>
 #include "Config.h"
 
 /** Firmware version, hardware version, and maximal values */
 #define OS_FW_VERSION			216		// Firmware version: 216 means 2.1.6
-										// if this number is different from the one stored in non-volatile memory
-										// a device reset will be automatically triggered
+										            // if this number is different from the one stored in non-volatile memory
+										          // a device reset will be automatically triggered
 
 #define OS_FW_MINOR				1		// Firmware minor version
 
@@ -327,7 +327,7 @@ typedef enum
 	#define PIN_RF_DATA			A9		// RF data pin (Note 3 below / not used)
 	#define PIN_RAINSENSOR		A10		// rain sensor (Note 3 below / not used)
 	#define PIN_FLOWSENSOR		A11		// flow sensor (currently shared with rain sensor) (Note 3 below / not used)
-	#define PIN_FLOWSENSOR_INT	A12		// flow sensor interrupt pin (INT1)  (Note 3 below / not used)
+  	#define PIN_FLOWSENSOR_INT	A12		// flow sensor interrupt pin (INT1)  (Note 3 below / not used)
 	#define PIN_EXP_SENSE		A13		// expansion board sensing pin (A4) (Note 3 below / not used)
 	#define PIN_CURR_SENSE		A14		// current sensing pin (A7) (Note 3 below / not used)
 	#define PIN_CURR_DIGITAL	A15		// digital pin index for A7 (Note 3 below / not used)

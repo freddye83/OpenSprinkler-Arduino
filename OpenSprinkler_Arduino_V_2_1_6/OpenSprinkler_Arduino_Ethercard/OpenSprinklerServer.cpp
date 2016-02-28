@@ -50,11 +50,11 @@ extern OpenSprinkler os;
 extern ProgramData pd;
 
 #ifdef OPENSPRINKLER_ARDUINO
-	extern prog_char op_json_names[];
-	extern prog_char op_max[];
+extern prog_char op_json_names[];
+extern prog_char op_max[];
 #else
-	extern char op_json_names[];
-	extern char op_max[];
+extern char op_json_names[];
+extern char op_max[];
 #endif
 
 void write_log ( byte type, ulong curr_time );
@@ -1696,10 +1696,9 @@ void handle_web_request ( char *p )
         byte i;
         for ( i=0; i<sizeof ( urls ) /sizeof ( URLHandler ); i++ )
         {
-            if ( pgm_read_byte ( _url_keys+2*i ) ==com[0]
-                    &&pgm_read_byte ( _url_keys+2*i+1 ) ==com[1] )
+            if ( pgm_read_byte ( _url_keys+2*i ) == com[0]
+                    &&pgm_read_byte ( _url_keys+2*i+1 ) == com[1] )
             {
-
                 // check password
                 byte ret = HTML_UNAUTHORIZED;
 
@@ -1779,7 +1778,11 @@ unsigned long getNtpTime()
     do
     {
         ether.ntpRequest ( ntpip, ++ntpclientportL );
+#ifdef OPENSPRINKLER_ARDUINO
+		expire = millis() + 5000; // better practice to wait 4 seconds or more
+#else
         expire = millis() + 1000; // wait for at most 1 second
+#endif
         do
         {
             word len = ether.packetReceive();
@@ -1800,7 +1803,11 @@ unsigned long getNtpTime()
         while ( millis() < expire );
         tick ++;
     }
-    while ( tick<20 );
+#ifdef OPENSPRINKLER_ARDUINO
+    while ( tick < 5 );		// we don't need to retry 20 times - 5 is fine
+#else
+	while (tick < 20);
+#endif
     return 0;
 }
 #endif

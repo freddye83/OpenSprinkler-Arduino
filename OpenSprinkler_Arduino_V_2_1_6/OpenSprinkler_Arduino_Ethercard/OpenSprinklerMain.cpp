@@ -37,6 +37,7 @@
 
 #ifdef OPENSPRINKLER_ARDUINO_W5100
 byte EtherCardW5100::buffer[ETHER_BUFFER_SIZE]; // Ethernet packet buffer
+char ether_buffer[ETHER_BUFFER_SIZE];
 #else
 byte Ethernet::buffer[ETHER_BUFFER_SIZE];		// Ethernet packet buffer
 #endif
@@ -263,7 +264,7 @@ void do_setup()
 #ifdef OPENSPRINKLER_ARDUINO
     DEBUG_BEGIN ( 115200 );
 #else
-	DEBUG_BEGIN ( 9600 );
+    DEBUG_BEGIN ( 9600 );
 #endif
 
     DEBUG_PRINTLN ( "Started..." );
@@ -373,15 +374,16 @@ void do_loop()
     os.status.mas = os.options[OPTION_MASTER_STATION];
     os.status.mas2= os.options[OPTION_MASTER_STATION_2];
     time_t curr_time = os.now_tz();
+
     // ====== Process Ethernet packets ======
 #if defined(ARDUINO)  // Process Ethernet packets for Arduino
-    uint16_t pos=ether.packetLoop ( ether.packetReceive() );
+    uint16_t pos = ether.packetLoop ( ether.packetReceive() );
     if ( pos>0 )  // packet received
     {
 #ifdef OPENSPRINKLER_ARDUINO_W5100
         handle_web_request ( ( char* ) EtherCardW5100::buffer + pos );
 #else
-        handle_web_request ( ( char* ) Ethernet::buffer+pos );
+        handle_web_request ( ( char* ) Ethernet::buffer + pos );
 #endif
     }
 
@@ -811,10 +813,10 @@ void do_loop()
         check_weather();
 
 #ifdef OPENSPRINKLER_ARDUINO_HEARTBEAT
-		if (curr_time % 2 == 0)
-			digitalWrite(PIN_HEARTBEAT, HIGH);
-		else
-			digitalWrite(PIN_HEARTBEAT, LOW);
+        if ( curr_time % 2 == 0 )
+            digitalWrite ( PIN_HEARTBEAT, HIGH );
+        else
+            digitalWrite ( PIN_HEARTBEAT, LOW );
 #endif // OPENSPRINKLER_ARDUINO_HEARTBEAT
 
     }
@@ -824,6 +826,12 @@ void do_loop()
 #endif
 }
 
+#ifdef OPENSPRINKLER_ARDUINO
+	uint8_t weather_retries = 0;
+	#define	WEATHER_RETRY_TIMEOUT   5 				// 5 seconds between retries
+	#define WEATHER_RETRIES			5				// retry up to 5 times
+#endif // OPENSPRINKLER_ARDUINO
+
 /** Make weather query */
 void check_weather()
 {
@@ -831,7 +839,7 @@ void check_weather()
     // - network check has failed, or
     // - a program is currently running
     // - the controller is in remote extension mode
-    if ( os.status.network_fails>0 || os.status.program_busy || os.options[OPTION_REMOTE_EXT_MODE] ) return;
+    if ( os.status.network_fails > 0 || os.status.program_busy || os.options[OPTION_REMOTE_EXT_MODE] ) return;
 
     ulong ntz = os.now_tz();
     if ( os.checkwt_success_lasttime && ( ntz > os.checkwt_success_lasttime + CHECK_WEATHER_SUCCESS_TIMEOUT ) )
@@ -842,11 +850,27 @@ void check_weather()
         os.status.safe_reboot = 1;
         return;
     }
+
+#ifdef OPENSPRINKLER_ARDUINO
+	// Check for weather if:
+	// - weather hasn't been checked before; or
+	// - greater than 1 hour since last checking; or
+	// - the last try wasn't successful, up to 5 retries at 5 second intervals
+	if ( !os.checkwt_lasttime || 
+	   ( ntz > os.checkwt_lasttime + CHECK_WEATHER_TIMEOUT) || 
+	   ( ( ntz > os.checkwt_lasttime + WEATHER_RETRY_TIMEOUT) && (weather_retries > 0) && (weather_retries < WEATHER_RETRIES) ) )
+	{
+		os.checkwt_lasttime = ntz;
+		weather_retries += 1;
+		GetWeather();
+	}
+#else
     if ( !os.checkwt_lasttime || ( ntz > os.checkwt_lasttime + CHECK_WEATHER_TIMEOUT ) )
     {
         os.checkwt_lasttime = ntz;
         GetWeather();
     }
+#endif // OPENSPRINKLER_ARDUINO
 }
 
 /** Turn off a station

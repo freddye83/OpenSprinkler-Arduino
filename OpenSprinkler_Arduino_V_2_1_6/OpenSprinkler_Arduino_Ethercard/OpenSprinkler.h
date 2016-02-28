@@ -38,7 +38,7 @@
 	#include <DS1307RTC.h>
 
 	#ifdef OPENSPRINKLER_ARDUINO_W5100
-	  #include "../EtherCardW5100.h"
+	  #include "EtherCardW5100.h"
 	#else
 	  #include <EtherCard.h>
 	#endif // OPENSPRINKLER_ARDUINO_W5100

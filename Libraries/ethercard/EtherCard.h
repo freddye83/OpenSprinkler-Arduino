@@ -270,7 +270,7 @@ public:
 /** This class provides the main interface to a ENC28J60 based network interface card and is the class most users will use.
 *   @note   All TCP/IP client (outgoing) connections are made from source port in range 2816-3071. Do not use these source ports for other purposes.
 */
-class EtherCard : public ENC28J60 {
+class EtherCard : public Ethernet {
 public:
     static uint8_t mymac[6];  ///< MAC address
     static uint8_t myip[4];   ///< IP address

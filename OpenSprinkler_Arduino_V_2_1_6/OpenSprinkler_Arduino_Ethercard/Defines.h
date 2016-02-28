@@ -25,12 +25,13 @@
 #define _DEFINES_H
 
 #include <Arduino.h>
+#include <Time.h>
 #include "Config.h"
 
 /** Firmware version, hardware version, and maximal values */
 #define OS_FW_VERSION			216		// Firmware version: 216 means 2.1.6
-										// if this number is different from the one stored in non-volatile memory
-										// a device reset will be automatically triggered
+										            // if this number is different from the one stored in non-volatile memory
+										          // a device reset will be automatically triggered
 
 #define OS_FW_MINOR				1		// Firmware minor version
 
@@ -253,9 +254,9 @@ typedef enum
 #ifdef OPENSPRINKLER_ARDUINO
 	#define PIN_D0				0		// Serial port - do not use
 	#define PIN_D1				1		// Serial port - do not use
-	#define PIN_LCD_D4			2		// Freetronics LCD - see note 1 below
+	#define PIN_LCD_D4			2		// Freetronics LCD - see Note 1 below
 	#define PIN_LCD_BACKLIGHT	3		// Freetronics LCD backlight
-	#define PIN_W5100_SD_CS		4		// W5100 SD card chip select 
+	#define PIN_W5100_SD_CS		4		// W5100 SD card chip select - see Note 1 below
 	#define PIN_LCD_D5			5		// Freetronics LCD
 	#define PIN_LCD_D6			6		// Freetronics LCD
 	#define PIN_LCD_D7			7		// Freetronics LCD
@@ -276,25 +277,25 @@ typedef enum
 	#define PIN_D20				20		// I2C Interface - SDA (do not use) 
 	#define PIN_D21				21		// I2C Interface - SCL (do not use)
 
-	#define PIN_STN_S09			22		// Watering stations 9 to 16 (Note 2 below)
-	#define PIN_STN_S13			23		// Watering stations 9 to 16 (Note 2 below)
-	#define PIN_STN_S10			24		// Watering stations 9 to 16 (Note 2 below)
-	#define PIN_STN_S14			25		// Watering stations 9 to 16 (Note 2 below)
-	#define PIN_STN_S11			26		// Watering stations 9 to 16 (Note 2 below)
-	#define PIN_STN_S15			27		// Watering stations 9 to 16 (Note 2 below)
-	#define PIN_STN_S12			28		// Watering stations 9 to 16 (Note 2 below)
-	#define PIN_STN_S16			29		// Watering stations 9 to 16 (Note 2 below)
+	#define PIN_STN_S09			22		// Watering stations 17 to 24 (Note 2 below)
+	#define PIN_STN_S13			23		// Watering stations 17 to 24 (Note 2 below)
+	#define PIN_STN_S10			24		// Watering stations 17 to 24 (Note 2 below)
+	#define PIN_STN_S14			25		// Watering stations 17 to 24 (Note 2 below)
+	#define PIN_STN_S11			26		// Watering stations 17 to 24 (Note 2 below)
+	#define PIN_STN_S15			27		// Watering stations 17 to 24 (Note 2 below)
+	#define PIN_STN_S12			28		// Watering stations 17 to 24 (Note 2 below)
+	#define PIN_STN_S16			29		// Watering stations 17 to 24 (Note 2 below)
 
-	#define PIN_STN_S17			30		// Watering stations 17 to 24 (Note 2 below)
-	#define PIN_STN_S18			31		// Watering stations 17 to 24 (Note 2 below)
-	#define PIN_STN_S19			32		// Watering stations 17 to 24 (Note 2 below)
-	#define PIN_STN_S20			33		// Watering stations 17 to 24 (Note 2 below)
+	#define PIN_STN_S17			30		// Watering stations 9 to 16 (Note 2 below)
+	#define PIN_STN_S18			31		// Watering stations 9 to 16 (Note 2 below)
+	#define PIN_STN_S19			32		// Watering stations 9 to 16 (Note 2 below)
+	#define PIN_STN_S20			33		// Watering stations 9 to 16 (Note 2 below)
 	#define PIN_ETHERCARD_SD_CS	34		// SD card chip select pin for Dave's ENC28J60 config
 	#define PIN_D35				35		// not used (Note 4 below)
-	#define PIN_STN_S21			36		// Watering stations 17 to 24 (Note 2 below)
-	#define PIN_STN_S22			37		// Watering stations 17 to 24 (Note 2 below)
-	#define PIN_STN_S23			38		// Watering stations 17 to 24 (Note 2 below)
-	#define PIN_STN_S24			39		// Watering stations 17 to 24 (Note 2 below)
+	#define PIN_STN_S21			36		// Watering stations 9 to 16 (Note 2 below)
+	#define PIN_STN_S22			37		// Watering stations 9 to 16 (Note 2 below)
+	#define PIN_STN_S23			38		// Watering stations 9 to 16 (Note 2 below)
+	#define PIN_STN_S24			39		// Watering stations 9 to 16 (Note 2 below)
 
 	#define PIN_STN_S04			40		// Watering stations 1 to 8 (Note 2 below)	
 	#define PIN_STN_S08			41		// Watering stations 1 to 8 (Note 2 below)
@@ -326,7 +327,7 @@ typedef enum
 	#define PIN_RF_DATA			A9		// RF data pin (Note 3 below / not used)
 	#define PIN_RAINSENSOR		A10		// rain sensor (Note 3 below / not used)
 	#define PIN_FLOWSENSOR		A11		// flow sensor (currently shared with rain sensor) (Note 3 below / not used)
-	#define PIN_FLOWSENSOR_INT	A12		// flow sensor interrupt pin (INT1)  (Note 3 below / not used)
+  	#define PIN_FLOWSENSOR_INT	A12		// flow sensor interrupt pin (INT1)  (Note 3 below / not used)
 	#define PIN_EXP_SENSE		A13		// expansion board sensing pin (A4) (Note 3 below / not used)
 	#define PIN_CURR_SENSE		A14		// current sensing pin (A7) (Note 3 below / not used)
 	#define PIN_CURR_DIGITAL	A15		// digital pin index for A7 (Note 3 below / not used)
@@ -372,7 +373,7 @@ typedef enum
 		#define LCD_BACKLIGHT_ON()			digitalWrite( PIN_LCD_BACKLIGHT, HIGH )
 		#define LCD_BACKLIGHT(state)		{if( state ){digitalWrite( PIN_LCD_BACKLIGHT, HIGH );}else{digitalWrite( PIN_LCD_BACKLIGHT, LOW );} }
 
-				// ADC readings expected for the 5 buttons on the ADC input
+		// ADC readings expected for the 5 buttons on the ADC input
 		#define RIGHT_10BIT_ADC		0		// right
 		#define UP_10BIT_ADC		145		// up
 		#define DOWN_10BIT_ADC		329		// down
@@ -390,11 +391,17 @@ typedef enum
 	typedef const char prog_char;
 	typedef const char prog_uchar;
 
+	// Auto reboot time
+	#define REBOOT_HR				12		// hour to perform daily reboot
+	#define REBOOT_MIN				00		// min  to perform daily reboot
+	#define REBOOT_SEC				00		// sec  to perform daily reboot
+
 #endif // OPENSPRINKLER_ARDUINO
 
 #ifndef OPENSPRINKLER_ARDUINO_DISCRETE
 
-	#define MAX_EXT_BOARDS		5  // maximum number of exp. boards (each expands 8 stations)
+	// maximum number of exp. boards (each expands 8 stations)
+	#define MAX_EXT_BOARDS		5  
 
 	// hardware pins
 	#define PIN_BUTTON_1		31		// button 1
@@ -444,25 +451,21 @@ typedef enum
 	#define ETHER_BUFFER_SIZE		960   // ATmega644 has 4K RAM, so use a smaller buffer
 #endif
 
-#ifdef OPENSPRINKLER_ARDUINO_AUTOREBOOT
-	#define REBOOT_HR				12     // hour to perform daily reboot
-	#define REBOOT_MIN				00     // min  to perform daily reboot
-	#define REBOOT_SEC				00     // sec  to perform daily reboot
-#endif	// OPENSPRINKLER_ARDUINO_AUTOREBOOT
-
 #ifdef OPENSPRINKLER_ARDUINO_WDT
 	#define 	wdt_reset()   __asm__ __volatile__ ("wdr")  // watchdog timer reset
 #endif	// OPENSPRINKLER_ARDUINO_WDT
 
 #define SERIAL_DEBUG
 #if defined(SERIAL_DEBUG) /** Serial debug functions */
-	#define DEBUG_BEGIN(x)   Serial.begin(x)
-	#define DEBUG_PRINT(x)   Serial.print(x)
-	#define DEBUG_PRINTLN(x) Serial.println(x)
+	#define DEBUG_BEGIN(x)		Serial.begin(x)
+	#define DEBUG_PRINT(x)		Serial.print(x)
+	#define DEBUG_PRINTF(x,y)	Serial.print(x, y)
+	#define DEBUG_PRINTLN(x)	Serial.println(x)
 #else
-	#define DEBUG_BEGIN(x)   {}
-	#define DEBUG_PRINT(x)   {}
-	#define DEBUG_PRINTLN(x) {}
+	#define DEBUG_BEGIN(x)		{}
+	#define DEBUG_PRINT(x)		{}
+	#define DEBUG_PRINTF(x,y)	{}
+	#define DEBUG_PRINTLN(x)	{}
 #endif
 
 typedef unsigned char   uint8_t;
@@ -553,13 +556,13 @@ inline void ultoa ( unsigned long v,char *s,int b )
 #define strcat_P     strcat
 #define strcpy_P     strcpy
 #define PROGMEM
-typedef const char prog_char;
-typedef const char prog_uchar;
-typedef const char* PGM_P;
+typedef const char		prog_char;
+typedef const char		prog_uchar;
+typedef const char*		PGM_P;
 typedef unsigned char   uint8_t;
 typedef short           int16_t;
 typedef unsigned short  uint16_t;
-typedef bool boolean;
+typedef bool			boolean;
 
 #endif  // end of Hardawre defines
 
