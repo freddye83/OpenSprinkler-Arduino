@@ -272,10 +272,11 @@ bool EtherCardW5100::staticSetup ( const uint8_t* my_ip, const uint8_t* gw_ip, c
     // convert bytes to IPAddress
     IPAddress ip = Byte2IP ( my_ip );
     IPAddress gw = Byte2IP ( gw_ip );
+	IPAddress dns = Byte2IP(dns_ip);
     IPAddress subnet = Byte2IP ( mask );
 
     // initialize the ethernet device and start listening for clients
-    Ethernet.begin ( mymac, ip, gw, subnet );
+    Ethernet.begin ( mymac, ip, dns, gw, subnet );
     incoming_server.begin();
     udp_client.begin ( NTP_CLIENT_PORT );
 
