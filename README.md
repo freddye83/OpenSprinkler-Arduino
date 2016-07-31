@@ -1,3 +1,11 @@
+UPDATE 31 JULY 2016 - WEATHER API KEY 
+----------------------------------
+Unfortunately I've had to regenerate the Weather Underground API key as it was getting over 500 calls per day so exceeding the limit for a free key. As of today, the old API key (e409b2aeaa5e3ffe) that was left in the source code will no longer work.
+
+Please see the instructions here to register and generate a key for your opensprinkler system (it's free for developers) -> https://opensprinkler.freshdesk.com/support/solutions/articles/5000017312-using-weather-adjustments
+
+When you have your very own shiny new key, please add it to 'defines.h' (and delete the deliberate #error line above)
+
 UPDATE FEBRUARY 2016 - V2.1.6 IS IN BETA
 ---------------------------------------
   
