@@ -40,6 +40,7 @@ About:		OpenSprinkler-Arduino is a fork of Ray's OpenSprinkler code that's amend
 // You can also search the project for these keywords to find where the code has been modified
 #define OPENSPRINKLER_ARDUINO
 #define OPENSPRINKLER_ARDUINO_DISCRETE			// use discrete IO instead of a shift register to control sprinkler outputs
+//#define OPENSPRINKLER_ARDUINO_DISCRETE_INVERT	// uncomment this line to invert the logic of the discrete IO (LOW to HIGH and vice versa) 
 #define OPENSPRINKLER_ARDUINO_FREETRONICS_LCD	// use Freetronics LCD with keypad
 #define OPENSPRINKLER_ARDUINO_W5100				// use Wiznet5100 Ethernet shield (without this the code defaults to the Ethercard enc28j60 library)
 #define OPENSPRINKLER_ARDUINO_AUTOREBOOT		// this is an optional function to reboot daily to ensure stable operation
@@ -47,6 +48,7 @@ About:		OpenSprinkler-Arduino is a fork of Ray's OpenSprinkler code that's amend
 #define OPENSPRINKLER_ARDUINO_HEARTBEAT			// this is an optional function to say 'alls well' - flashes an LED, and the ':' on the LCD time at 1Hz
 #define OPENSPRINKLER_ARDUINO_WDT				// this flag turns the WDT on or off (refer to your reference documentation 
 												// for whether the firmware loaded on your Arduino mega supports a WDT)
+
 // =================================================================
 
 #endif  // _OS_CONFIG_H

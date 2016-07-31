@@ -41,6 +41,7 @@ About:		This is a fork of Rays OpenSprinkler code thats amended to use alternati
 // You can also search the project for these keywords to find where the code has been modified
 #define OPENSPRINKLER_ARDUINO
 #define OPENSPRINKLER_ARDUINO_DISCRETE			// use discrete IO instead of a shift register to control sprinkler outputs
+//#define OPENSPRINKLER_ARDUINO_DISCRETE_INVERT	// uncomment this line to invert the logic of the discrete IO (LOW to HIGH and vice versa) 
 #define OPENSPRINKLER_ARDUINO_FREETRONICS_LCD	// use Freetronics LCD with keypad
 //#define OPENSPRINKLER_ARDUINO_W5100			// use Wiznet5100 Ethernet shield (without this the code defaults to the Ethercard enc28j60 library)
 #define OPENSPRINKLER_ARDUINO_AUTOREBOOT		// this is an optional function to reboot daily to ensure stable operation

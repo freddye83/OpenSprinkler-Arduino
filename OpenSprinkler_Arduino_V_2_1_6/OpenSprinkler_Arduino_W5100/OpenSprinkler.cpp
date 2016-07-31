@@ -44,11 +44,11 @@ ulong OpenSprinkler::flowcount_time_ms;
 ulong OpenSprinkler::raindelay_start_time;
 byte OpenSprinkler::button_timeout;
 #ifdef OPENSPRINKLER_ARDUINO
-	ulong OpenSprinkler::checkwt_lasttime = 0;
-	ulong OpenSprinkler::checkwt_success_lasttime = 0;
+ulong OpenSprinkler::checkwt_lasttime = 0;
+ulong OpenSprinkler::checkwt_success_lasttime = 0;
 #else
-	ulong OpenSprinkler::checkwt_lasttime;
-	ulong OpenSprinkler::checkwt_success_lasttime;
+ulong OpenSprinkler::checkwt_lasttime;
+ulong OpenSprinkler::checkwt_success_lasttime;
 #endif
 
 char tmp_buffer[TMP_BUFFER_SIZE+1];       // scratch buffer
@@ -826,7 +826,11 @@ void OpenSprinkler::apply_all_station_bits()
 
         for ( s = 0; s < 8; s++ )
         {
+#ifdef OPENSPRINKLER_ARDUINO_DISCRETE_INVERT
+            digitalWrite ( station_pins[ ( bid * 8 ) + s], ( sbits & ( ( byte ) 1 << s ) ) ? LOW : HIGH );
+#else
             digitalWrite ( station_pins[ ( bid * 8 ) + s], ( sbits & ( ( byte ) 1 << s ) ) ? HIGH : LOW );
+#endif
 #ifdef SERIAL_DEBUG
             if ( ( sbits & ( ( byte ) 1 << s ) ) )
                 DEBUG_PRINT ( station_pins[ ( bid * 8 ) + s] );
