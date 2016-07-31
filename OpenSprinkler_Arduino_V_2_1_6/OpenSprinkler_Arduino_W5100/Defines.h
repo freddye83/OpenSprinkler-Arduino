@@ -162,7 +162,10 @@
 /** Default password, location string, weather key, script urls */
 #define DEFAULT_PASSWORD          "opendoor"
 #define DEFAULT_LOCATION          "Boston,MA"
-#define DEFAULT_WEATHER_KEY       "e409b2aeaa5e3ffe"	// replace this key with your own
+
+//#error Deliberate error - please edit 'defines.h' to add your Weather Underground API key (refer to https://opensprinkler.freshdesk.com/support/solutions/articles/5000017312-using-weather-adjustments )
+#define DEFAULT_WEATHER_KEY       "0000000000000000"	// replace this key with your own, then delete the #error line above
+
 #define DEFAULT_JAVASCRIPT_URL    "https://ui.opensprinkler.com/js"
 #define DEFAULT_WEATHER_URL       "weather.opensprinkler.com"
 
