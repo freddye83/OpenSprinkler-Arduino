@@ -1779,15 +1779,18 @@ unsigned long getNtpTime()
     {
         ether.ntpRequest ( ntpip, ++ntpclientportL );
 #ifdef OPENSPRINKLER_ARDUINO
-		expire = millis() + 5000; // better practice to wait 4 seconds or more
+        expire = millis() + 5000; // better practice to wait 4 seconds or more
+        do
+        {
+            if ( ether.ntpProcessAnswer ( &time, ntpclientportL ) )
 #else
         expire = millis() + 1000; // wait for at most 1 second
-#endif
         do
         {
             word len = ether.packetReceive();
             ether.packetLoop ( len );
             if ( len > 0 && ether.ntpProcessAnswer ( &time, ntpclientportL ) )
+#endif
             {
                 if ( ( time & 0x80000000UL ) ==0 )
                 {
@@ -1806,7 +1809,7 @@ unsigned long getNtpTime()
 #ifdef OPENSPRINKLER_ARDUINO
     while ( tick < 5 );		// we don't need to retry 20 times - 5 is fine
 #else
-	while (tick < 20);
+    while ( tick < 20 );
 #endif
     return 0;
 }
