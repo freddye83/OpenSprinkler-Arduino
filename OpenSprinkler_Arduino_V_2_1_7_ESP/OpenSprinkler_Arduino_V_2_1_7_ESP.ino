@@ -60,7 +60,6 @@ As always - FULL CREDIT to Ray for all his hard work to build and maintain the O
 // This is the main configuration file to set up Opensprinkler Arduino
 #include <Arduino.h>
 #include <Wire.h>
-
 #ifndef ESP8266
     #include <SdFat.h>
 #endif
@@ -72,10 +71,8 @@ extern OpenSprinkler os;
 #ifdef OPENSPRINKLER_ARDUINO_W5100  
     //ether = &ether_w5100;
 #elif defined (OPENSPRINKLER_ARDUINO_ENC28J60)
-
     byte Ethernet::buffer[ETHER_BUFFER_SIZE];
     EtherCardWrapper<EtherCard> ether;
-
 #else
     #error Please define a network card in OpenSprinkler_Arduino.h
 #endif // OPENSPRINKLER_ARDUINO_W5100

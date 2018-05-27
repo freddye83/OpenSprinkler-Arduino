@@ -57,8 +57,8 @@ About:		This is a fork of Rays OpenSprinkler code thats amended to use alternati
 #ifdef OPENSPRINKLER_ARDUINO
 
     #include <Arduino.h>
-    #include "libraries/Time.h"
-    #include "libraries/DS1307RTC.h"
+    #include "src/Time.h"
+    #include "src/DS1307RTC.h"
     #include "Opensprinkler_Arduino_Undef.h"
 
     /* READ ME - PIN_EXT_BOARDS defines the total number of discrete digital IO pins
@@ -255,11 +255,11 @@ About:		This is a fork of Rays OpenSprinkler code thats amended to use alternati
     #define BUTTON_LEFT			4		// 
     #define BUTTON_SELECT		5		//  
 
-    #include "libraries/LiquidCrystal.h"
+    #include "src/LiquidCrystal.h"
     #include "OpenSprinkler_Arduino_Button.h"
 
 #else
-    #include "libraries/LiquidCrystal.h"
+    #include "src/LiquidCrystal.h"
 #endif // OPENSPRINKLER_ARDUINO_FREETRONICS_LCD
 
 // =================================================================
@@ -274,8 +274,8 @@ About:		This is a fork of Rays OpenSprinkler code thats amended to use alternati
 
 #elif defined (OPENSPRINKLER_ARDUINO_ENC28J60)
 
-    #include "ethercard/EtherCardWrapper.h"
-    #include "ethercard/EtherCard.h"
+    #include "src/ethercard/EtherCardWrapper.h"
+    #include "src/ethercard/EtherCard.h"
 
     // Set up the right pins for the ethernet controller in use
     #define PIN_ETHER_CS    PIN_ENC28J60_CS
@@ -291,7 +291,7 @@ About:		This is a fork of Rays OpenSprinkler code thats amended to use alternati
 
 #ifdef OPENSPRINKLER_ARDUINO_AUTOREBOOT
 
-    #include "libraries/TimeAlarms.h"
+    #include "src/TimeAlarms.h"
 
     // Auto reboot time
     #define REBOOT_HR				12		// hour to perform daily reboot
@@ -304,7 +304,7 @@ About:		This is a fork of Rays OpenSprinkler code thats amended to use alternati
 
 #ifdef OPENSPRINKLER_ARDUINO_FREEMEM
 
-    #include "libraries/MemoryFree.h"
+    #include "src/MemoryFree.h"
 
 #endif // OPENSPRINKLER_ARDUINO_FREEMEM
 
@@ -339,5 +339,7 @@ typedef const char prog_char;
 typedef const char prog_uchar;
 
 #endif  // _OS_ARDUINO_H_
+
+
 
 
