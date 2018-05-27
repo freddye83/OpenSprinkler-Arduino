@@ -1,3 +1,13 @@
+UPDATE MAY 2018 - V2.1.7 IS IN BETA
+---------------------------------------
+  
+OpenSprinkler_Arduino V2.0.0	- superceded / it contains deprecated types that will no longer compile in the Arduino IDE
+OpenSprinkler_Arduino V2.0.7	- superceded / it contains deprecated types that will no longer compile in the Arduino IDE
+OpenSprinkler_Arduino V2.1.6	- superceded / may still work however 2.1.7 offers several advantages
+OpenSprinkler_Arduino V2.1.7	- beta test / based on the unified firmware at https://github.com/OpenSprinkler/OpenSprinkler-Firmware
+
+PLEASE see the 'Notes' section below for some known issues
+
 UPDATE 31 JULY 2016 - WEATHER API KEY 
 ----------------------------------
 Unfortunately I've had to regenerate the Weather Underground API key as it was getting over 500 calls per day so exceeding the limit for a free key. As of today, the old API key (e409b2aeaa5e3ffe) that was left in the source code will no longer work.
@@ -21,7 +31,7 @@ Overview
 OpenSprinkler-Arduino is a fork of Ray's OpenSprinkler code thats amended to use alternative hardware:
 
 - Arduino Mega 2560 (Arduino MCU that can handle compiled code size of around 60K)
-- Your choice of ethernet (there are two versions of code in the repository):
+- Your choice of ethernet - the code can be configured in the 'OpenSprinkler_Arduino.h' file for:
 	Wiznet W5100 Ethernet with onboard SD Card or
 	Enc28j60 ethernet with external SD card
 - Freetronics LCD Keypad Shield
@@ -37,18 +47,18 @@ In general the approach is to make the minimum changes necessary to use standard
 
 Changes from Rays original code are marked with OPENSPRINKLER_ARDUINO (or variations thereof)
 
-Refer to the start of 'Config.h' for options to substitute different hardware and turn functions on or off.
+Refer to the start of 'OpenSprinkler_Arduino.h' for options to substitute different hardware and turn functions on or off.
 
 As always - FULL CREDIT to Ray for all his hard work to build and maintain the Open Sprinkler project!
 
 Current Release
 ---------------
 
-Version:     Opensprinkler V2.1.6 / BETA
+Version:     Opensprinkler V2.1.7 / BETA
 
-Date:        February 2016
+Date:        May 2018
 
-Repository:  https://github.com/Dave1001/OpenSprinkler-Arduino
+Repository:  https://github.com/plainolddave/OpenSprinkler-Arduino
 
 License:     Creative Commons Attribution-ShareAlike 3.0 license
 
@@ -87,6 +97,8 @@ To install and compile this code you need:
   
    2.  Libraries:
 
+TODO - Libraries are out of date
+
    Get them all here -> https://github.com/Dave1001/OpenSprinkler-Arduino/libraries
 
    Or download them from:
@@ -120,8 +132,8 @@ Notes
 If you're trying to make it work:
 
 - For the ENC28J60 Version:
-	- sadly I was unable to make one version of the code that simply switches between Wiznet5100 and ENC28J60 with a #define - there were simply too many compiler errors and weird conflicts between libraries. This is the reason that the two versions for Wiznet5100 and ENC28J60 are in seperate folders with seperate .ino files.
-	- I'm using non-standard pinouts for SPI so you'll definately need to amend "Defines.h" to update the chipselect pins for SD card and Ethernet to match your configuration
+	- this release 2.1.7 has one version of the code that simply switches between Wiznet5100 and ENC28J60 with a #define at 'OpenSprinkler_Arduino.h'. I've tried hard to ensure that weird conflicts between libraries are solved, but milage may vary.
+	- I'm using non-standard pinouts for SPI so you'll definately need to amend 'OpenSprinkler_Arduino.h' to update the chipselect pins for SD card and Ethernet to match your configuration
 
 - For the Wiznet W5100 Version:
 	- something is not quite right in the code to retreive weather (packetloop doesn't seem to handle it correctly 2 out of 3 attempts)
@@ -142,8 +154,8 @@ If you're trying to make it work:
 If you're a developer:
 
 - Software IDE
-	- I'm using Visual Studio 2015 Community Edition plus Visual Micro to build and upload code.
-	- this release was tested to compile and upload using Arduino IDE Version 1.6.7 (only) 
+	- I'm using Visual Studio 2017 Community Edition plus Visual Micro to build and upload code.
+	- this release was tested to compile and upload using Arduino IDE Version 1.8.5 (only) 
 
 - LCD Backlight Dimming
 	- no idea how dimming of the LCD backlight on the 'real' opensprinkler works / this code just implements simple on(bright) or off 
@@ -151,6 +163,7 @@ If you're a developer:
 - Discrete Outputs:
 	- the number of discrete pins is pre-defined as 16 maximum - you'll need to edit OpenSprinklerGen2.cpp and defines.h if you want more - make sure they're in multiples of 8 
 
+For the Wiznet W5100 Version only:
 - ICMP Library
 	- needs an include guard on ICMPPing.h (duh)
 
