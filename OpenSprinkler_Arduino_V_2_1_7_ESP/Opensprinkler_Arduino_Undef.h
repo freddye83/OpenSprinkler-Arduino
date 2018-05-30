@@ -1,39 +1,23 @@
 #pragma once
-/* ====================================================
+/* ==========================================================================================================
+This is a fork of Rays OpenSprinkler code thats amended to use alternative hardware:
 
-Version:	OpenSprinkler_Arduino 2.1.7
+EtherCardW5100.h and EtherCardW5100.cpp implements a minimal set of functions
+as a wrapper to replace the ENC28J60 EtherCard class libraries with the standard
+Arduino Wiznet5100 Ethernet library.
 
-Date:		May 2018
+Version:     Opensprinkler 2.1.8
 
-Repository: https://github.com/plainolddave/OpenSprinkler-Arduino
+Date:        May 2018
 
-License:	Creative Commons Attribution-ShareAlike 3.0 license
+Repository:  https://github.com/plainolddave/OpenSprinkler-Arduino
 
-About:		This is a fork of Rays OpenSprinkler code thats amended to use alternative hardware:
-- Arduino Mega 2560 (or any Arduino MCU that can handle compiled code size of around 70K)
-- Freetronics LCD Keypad Shield
-- Discrete IO outputs instead of using a shift register
-- Either:
-- Enc28j60 Ethernet with external SD Card or
-- Wiznet W5100 Ethernet (i.e. 'standard' for Arduino)
+License:     Creative Commons Attribution-ShareAlike 3.0 license
 
-In general the approach is to make minimum changes necessary to:
-1) use standard Arduino libraries
-2) get alternative hardware to run
-3) debug
+Refer to the README file for more information
 
-PLUS this version adds a couple of additional functions:
-- ability to reboot daily to ensure stable operation
-- ability to display free memory on the LCD for debugging
-- heartbeat function to say 'alls well' - flashes an LED and the ':' on the LCD time at 1Hz
-- ability to turns the WDT on or off (refer to your reference documentationas to whether WDT is supported by the bootloader on your arduino)
+========================================================================================================== */
 
-Otherwise the code is 'as is' from https://github.com/OpenSprinkler/OpenSprinkler-Firmware
-
-Changes from Rays original code are marked with OPENSPRINKLER_ARDUINO (or variations thereof)
-
-As always - FULL CREDIT to Ray for all his hard work to build and maintain the Open Sprinkler project!
-*/
 #ifndef _OS_ARDUINO_UNDEF_H_
 #define _OS_ARDUINO_UNDEF_H_
 

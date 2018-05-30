@@ -27,18 +27,22 @@
 #ifndef EtherCard_h
 #define EtherCard_h
 
+//#if ARDUINO >= 100
+//#include <Arduino.h> // Arduino 1.0
+//#define WRITE_RESULT size_t
+//#define WRITE_RETURN return 1;
+//#else
+//#include <WProgram.h> // Arduino 0022
+//#define WRITE_RESULT void
+//#define WRITE_RETURN
+//#endif
 
-#if ARDUINO >= 100
 #include <Arduino.h> // Arduino 1.0
 #define WRITE_RESULT size_t
 #define WRITE_RETURN return 1;
-#else
-#include <WProgram.h> // Arduino 0022
-#define WRITE_RESULT void
-#define WRITE_RETURN
-#endif
 
 #include <avr/pgmspace.h>
+#include "EtherCardBufferFiller.h"
 #include "enc28j60.h"
 #include "net.h"
 
@@ -137,60 +141,60 @@ public:
     friend void dumpStash (const char* msg, void* ptr);   // optional
 };
 
-/** This class populates network send / recieve buffers.
-*   Provides print type access to buffer
-*/
-class BufferFiller : public Print {
-    uint8_t *start; //!< Pointer to start of buffer
-    uint8_t *ptr; //!< Pointer to cursor position
-public:
-    /** @brief  Empty constructor
-    */
-    BufferFiller () {}
-
-    /** @brief  Constructor
-    *   @param  buf Pointer to the ethernet data buffer
-    */
-    BufferFiller (uint8_t* buf) : start (buf), ptr (buf) {}
-
-    /** @brief  Add formatted text to buffer
-    *   @param  fmt Format string
-    *   @param  ... parameters for format string
-    */
-    void emit_p (PGM_P fmt, ...);
-
-    /** @brief  Add data to buffer from character buffer
-    *   @param  s Pointer to data
-    *   @param  n Number of characters to copy
-    */
-    void emit_raw (const char* s, uint16_t n) { memcpy(ptr, s, n); ptr += n; }
-
-    /** @brief  Add data to buffer from program space string
-    *   @param  p Program space string pointer
-    *   @param  n Number of characters to copy
-    */
-    void emit_raw_p (PGM_P p, uint16_t n) { memcpy_P(ptr, p, n); ptr += n; }
-
-    /** @brief  Get pointer to start of buffer
-    *   @return <i>uint8_t*</i> Pointer to start of buffer
-    */
-    uint8_t* buffer () const { return start; }
-
-    /** @brief  Get cursor position
-    *   @return <i>uint16_t</i> Cursor postion
-    */
-    uint16_t position () const { return ptr - start; }
-
-    /** @brief  Write one byte to buffer
-    *   @param  v Byte to add to buffer
-    */
-    virtual WRITE_RESULT write (uint8_t v) { *ptr++ = v; WRITE_RETURN }
-};
+///** This class populates network send / recieve buffers.
+//*   Provides print type access to buffer
+//*/
+//class BufferFiller : public Print {
+//    uint8_t *start; //!< Pointer to start of buffer
+//    uint8_t *ptr; //!< Pointer to cursor position
+//public:
+//    /** @brief  Empty constructor
+//    */
+//    BufferFiller () {}
+//
+//    /** @brief  Constructor
+//    *   @param  buf Pointer to the ethernet data buffer
+//    */
+//    BufferFiller (uint8_t* buf) : start (buf), ptr (buf) {}
+//
+//    /** @brief  Add formatted text to buffer
+//    *   @param  fmt Format string
+//    *   @param  ... parameters for format string
+//    */
+//    void emit_p (PGM_P fmt, ...);
+//
+//    /** @brief  Add data to buffer from character buffer
+//    *   @param  s Pointer to data
+//    *   @param  n Number of characters to copy
+//    */
+//    void emit_raw (const char* s, uint16_t n) { memcpy(ptr, s, n); ptr += n; }
+//
+//    /** @brief  Add data to buffer from program space string
+//    *   @param  p Program space string pointer
+//    *   @param  n Number of characters to copy
+//    */
+//    void emit_raw_p (PGM_P p, uint16_t n) { memcpy_P(ptr, p, n); ptr += n; }
+//
+//    /** @brief  Get pointer to start of buffer
+//    *   @return <i>uint8_t*</i> Pointer to start of buffer
+//    */
+//    uint8_t* buffer () const { return start; }
+//
+//    /** @brief  Get cursor position
+//    *   @return <i>uint16_t</i> Cursor postion
+//    */
+//    uint16_t position () const { return ptr - start; }
+//
+//    /** @brief  Write one byte to buffer
+//    *   @param  v Byte to add to buffer
+//    */
+//    virtual WRITE_RESULT write (uint8_t v) { *ptr++ = v; WRITE_RETURN }
+//};
 
 /** This class provides the main interface to a ENC28J60 based network interface card and is the class most users will use.
 *   @note   All TCP/IP client (outgoing) connections are made from source port in range 2816-3071. Do not use these source ports for other purposes.
 */
-class EtherCard : public Ethernet {
+class EtherCard : public ENC28J60 {
 public:
     static uint8_t mymac[6];  ///< MAC address
     static uint8_t myip[4];   ///< IP address

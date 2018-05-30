@@ -111,7 +111,8 @@ public:
     static uint8_t doBIST(uint8_t csPin = 8);
 };
 
-typedef ENC28J60 Ethernet; //!< Define alias Ethernet for ENC28J60
+// OPENSPRINKLER_ARDUINO 
+typedef ENC28J60 Ethernet28J60; //!< Define alias Ethernet for ENC28J60
 
 #endif
 

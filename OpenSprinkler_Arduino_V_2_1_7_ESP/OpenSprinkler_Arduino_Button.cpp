@@ -1,8 +1,9 @@
 /* ==========================================================================================================
-This is a fork of Rays OpenSprinkler code that is amended to use alternative hardware:
+This is a fork of Rays OpenSprinkler code thats amended to use alternative hardware:
 
-The class library implements a minimal set of functions as a wrapper to facilitate replacement
-of the Opensprinkler ENC28J60 class libraries with the Arduino Wiznet5100 Ethernet interface.
+EtherCardW5100.h and EtherCardW5100.cpp implements a minimal set of functions
+as a wrapper to replace the ENC28J60 EtherCard class libraries with the standard
+Arduino Wiznet5100 Ethernet library.
 
 Version:     Opensprinkler 2.1.8
 

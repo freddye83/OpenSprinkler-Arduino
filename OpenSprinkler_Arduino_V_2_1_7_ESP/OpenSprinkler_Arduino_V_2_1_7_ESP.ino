@@ -9,25 +9,25 @@ Repository: https://github.com/plainolddave/OpenSprinkler-Arduino
 License:	Creative Commons Attribution-ShareAlike 3.0 license
 
 About:		This is a fork of Rays OpenSprinkler code thats amended to use alternative hardware:
-- Arduino Mega 2560 (or any Arduino MCU that can handle compiled code size of around 70K)
-- Freetronics LCD Keypad Shield
-- Discrete IO outputs instead of using a shift register
-- Either:
-- Enc28j60 Ethernet with external SD Card or
-- Wiznet W5100 Ethernet (i.e. 'standard' for Arduino)
+                - Arduino Mega 2560 (or any Arduino MCU that can handle compiled code size of around 70K)
+                - Freetronics LCD Keypad Shield
+                - Discrete IO outputs instead of using a shift register
+                - Either:
+                    - Enc28j60 Ethernet with external SD Card or
+                    - Wiznet W5100 Ethernet (i.e. 'standard' for Arduino)
 
-In general the approach is to make minimum changes necessary to:
-1) use standard Arduino libraries
-2) get alternative hardware to run
-3) debug
+            In general the approach is to make minimum changes necessary to:
+                1) deconflict between Rays libraries that have been modified away from standard Arduino
+                2) get alternative hardware to run
+                3) debug
 
-PLUS this version adds a couple of additional functions:
-- reboot daily to ensure stable operation
-- option to display free memory on the LCD for debugging
-- heartbeat function to say 'alls well' - flashes an LED and the ':' on the LCD time at 1Hz
-- option to turn the WDT on or off (refer to your reference documentation as to whether WDT is supported by the bootloader on your arduino)
+            PLUS this version adds a couple of additional functions:
+                - reboot daily to ensure stable operation
+                - option to display free memory on the LCD for debugging
+                - heartbeat function to say 'alls well' - flashes an LED and the ':' on the LCD time at 1Hz
+                - option to turn the WDT on or off (refer to your reference documentation as to whether WDT is supported by the bootloader on your arduino)
 
-Otherwise the code is 'as is' from https://github.com/OpenSprinkler/OpenSprinkler-Firmware
+Otherwise the code is largely 'as is' from https://github.com/OpenSprinkler/OpenSprinkler-Firmware
 
 Changes from Rays original code are marked with OPENSPRINKLER_ARDUINO (or variations thereof)
 
@@ -69,13 +69,18 @@ As always - FULL CREDIT to Ray for all his hard work to build and maintain the O
 extern OpenSprinkler os;
 
 #ifdef OPENSPRINKLER_ARDUINO_W5100  
-    //ether = &ether_w5100;
-#elif defined (OPENSPRINKLER_ARDUINO_ENC28J60)
-    byte Ethernet::buffer[ETHER_BUFFER_SIZE];
+
+    EtherCardWrapper<EtherCardW5100> ether;
+    byte EtherCardW5100::buffer[ETHER_BUFFER_SIZE];
+
+#elif defined (OPENSPRINKLER_ARDUINO_ENC28J60) // OPENSPRINKLER_ARDUINO_W5100
+
     EtherCardWrapper<EtherCard> ether;
-#else
+    byte Ethernet28J60::buffer[ETHER_BUFFER_SIZE];
+
+#else   // OPENSPRINKLER_ARDUINO_ENC28J60
     #error Please define a network card in OpenSprinkler_Arduino.h
-#endif // OPENSPRINKLER_ARDUINO_W5100
+#endif  // OPENSPRINKLER_ARDUINO
 
 void do_setup();
 void do_loop();

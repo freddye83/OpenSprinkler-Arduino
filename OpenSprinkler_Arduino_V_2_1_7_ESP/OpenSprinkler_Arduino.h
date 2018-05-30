@@ -17,7 +17,7 @@ About:		This is a fork of Rays OpenSprinkler code thats amended to use alternati
 					- Wiznet W5100 Ethernet (i.e. 'standard' for Arduino)
 
 			In general the approach is to make minimum changes necessary to:
-				1) use standard Arduino libraries
+				1) deconflict between Rays libraries that have been modified away from standard Arduino
 				2) get alternative hardware to run
 				3) debug
 
@@ -45,8 +45,8 @@ About:		This is a fork of Rays OpenSprinkler code thats amended to use alternati
 #define OPENSPRINKLER_ARDUINO_DISCRETE			// use discrete IO instead of a shift register to control sprinkler outputs
 //#define OPENSPRINKLER_ARDUINO_DISCRETE_INVERT	// uncomment this line to invert the logic of the discrete IO (LOW to HIGH and vice versa) 
 #define OPENSPRINKLER_ARDUINO_FREETRONICS_LCD	// use Freetronics LCD with keypad
-//#define OPENSPRINKLER_ARDUINO_W5100			// use the standard Wiznet5100 Ethernet interface
-#define OPENSPRINKLER_ARDUINO_ENC28J60		    // use the less common (but cheaper) enc28j60 Ethernet interface, as per original opensprinkler hardware
+#define OPENSPRINKLER_ARDUINO_W5100			// use the standard Wiznet5100 Ethernet interface
+//#define OPENSPRINKLER_ARDUINO_ENC28J60		    // use the less common (but cheaper) enc28j60 Ethernet interface, as per original opensprinkler hardware
 #define OPENSPRINKLER_ARDUINO_AUTOREBOOT		// this is an optional function to reboot daily to ensure stable operation
 //#define OPENSPRINKLER_ARDUINO_FREEMEM			// this is an optional function to display free memory on the LCD for debugging
 #define OPENSPRINKLER_ARDUINO_HEARTBEAT			// this is an optional function to say 'alls well' - flashes an LED, and the ':' on the LCD time at 1Hz
@@ -265,12 +265,14 @@ About:		This is a fork of Rays OpenSprinkler code thats amended to use alternati
 // =================================================================
 #ifdef OPENSPRINKLER_ARDUINO_W5100
 
-    #include "EtherCard.h"
-    #include "EtherCardW5100.h"
+    #include "src/ethercard/EtherCardWrapper.h"
+    #include "src/ethercard/EtherCardW5100.h"
 
     // Set up the right pins for the ethernet controller in use
     #define PIN_ETHER_CS    PIN_W5100_ETHER_CS
     #define PIN_SD_CS       PIN_W5100_SD_CS
+
+    extern EtherCardWrapper<EtherCardW5100> ether; // Global declaration of ether
 
 #elif defined (OPENSPRINKLER_ARDUINO_ENC28J60)
 
@@ -331,12 +333,14 @@ About:		This is a fork of Rays OpenSprinkler code thats amended to use alternati
 
 #ifdef SERIAL_DEBUG
 #define DEBUG_DELAY(x) delay(x)
+#define DEBUG_PRINTF(x,y) Serial.print(x, y)
 #else
-#define DEBUG_DELAY(x)   {}
+#define DEBUG_DELAY(x) {}
+#define DEBUG_PRINTF(x,y) {}
 #endif
 
-typedef const char prog_char;
-typedef const char prog_uchar;
+//typedef const char prog_char;
+//typedef const char prog_uchar;
 
 #endif  // _OS_ARDUINO_H_
 

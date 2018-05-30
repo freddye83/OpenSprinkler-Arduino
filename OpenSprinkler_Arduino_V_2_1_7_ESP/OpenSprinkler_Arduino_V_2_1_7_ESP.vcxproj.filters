@@ -16,8 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenSprinkler_Arduino_V_2_1_7_ESP.ino" />
-    <None Include="src\ethercard\README_EtherCard.md" />
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.OpenSprinkler_Arduino_V_2_1_7_ESP.vsarduino.h">
@@ -110,6 +108,18 @@
     <ClInclude Include="src\ethercard\EtherCardW5100.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ethercard\ICMPPing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ethercard\ICMPUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ethercard\EtherCardBufferFiller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ethercard\SerialDebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="espconnect.cpp">
@@ -188,6 +198,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ethercard\EtherCardW5100.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ethercard\ICMPPing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ethercard\EtherCardBufferFiller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
