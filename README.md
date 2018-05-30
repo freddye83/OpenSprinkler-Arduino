@@ -8,23 +8,6 @@ OpenSprinkler_Arduino V2.1.7	- beta test / based on the unified firmware at http
 
 PLEASE see the 'Notes' section below for some known issues
 
-UPDATE 31 JULY 2016 - WEATHER API KEY 
-----------------------------------
-Unfortunately I've had to regenerate the Weather Underground API key as it was getting over 500 calls per day so exceeding the limit for a free key. As of today, the old API key (e409b2aeaa5e3ffe) that was left in the source code will no longer work.
-
-Please see the instructions here to register and generate a key for your opensprinkler system (it's free for developers) -> https://opensprinkler.freshdesk.com/support/solutions/articles/5000017312-using-weather-adjustments
-
-When you have your very own shiny new key, please add it to 'defines.h' (and delete the deliberate #error line above)
-
-UPDATE FEBRUARY 2016 - V2.1.6 IS IN BETA
----------------------------------------
-  
-OpenSprinkler_Arduino V2.0.0	- superceded / it contains deprecated types that will no longer compile in the Arduino IDE
-OpenSprinkler_Arduino V2.0.7	- superceded / it contains deprecated types that will no longer compile in the Arduino IDE
-OpenSprinkler_Arduino V2.1.6	- beta test / based on the unified firmware at https://github.com/OpenSprinkler/OpenSprinkler-Firmware
-
-While this release works OK, PLEASE see the 'Notes' section below for some known issues
-
 Overview
 --------
 
@@ -43,7 +26,7 @@ PLUS this version adds a couple of additional functions:
 - heartbeat function to say 'alls well' - flashes an LED and the ':' on the LCD time at 1Hz
 - ability to turns the WDT on or off (refer to your reference documentationas to whether WDT is supported by the bootloader on your arduino)
 
-In general the approach is to make the minimum changes necessary to use standard Arduino libraries, and to get alternative hardware to run, and to debug. Otherwise the code is 'as is' from https://github.com/OpenSprinkler/OpenSprinkler-Firmware
+In general the approach is to make the minimum changes necessary to get alternative hardware to run, and to debug. Otherwise the code is 'as is' from https://github.com/OpenSprinkler/OpenSprinkler-Firmware
 
 Changes from Rays original code are marked with OPENSPRINKLER_ARDUINO (or variations thereof)
 
@@ -125,6 +108,12 @@ TODO - Libraries are out of date
 [Ebay DS1307]:http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR10.TRC2.A0.H0.Xds1307&_nkw=ds1307&_sacat=0
 [Ebay DS3231]:http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2047675.m570.l1313.TR9.TRC2.A0.H0.Xds3231.TRS0&_nkw=ds3231&_sacat=0
 [Arduino Mega]:http://arduino.cc/en/Main/arduinoBoardMega2560
+
+Weather API Key 
+----------------------------------
+The old API key (e409b2aeaa5e3ffe) that was left in the source code for 2.1.6 will no longer work.
+
+Please see the instructions here to register and generate a key for your opensprinkler system (it's free for developers) -> https://openthings.freshdesk.com/support/solutions/articles/5000017485-getting-a-weather-api-key
   
 Notes
 ----------------------
